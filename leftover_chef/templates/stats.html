@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact - Leftover Chef</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: #343a40; }
+        .navbar { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e9ecef; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: #2c3b4b; text-decoration: none; }
+        .logo span { color: #ff7055; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: #6c757d; font-weight: 500; }
+        .nav-links a:hover { color: #ff7055; }
+        .nav-links a.active { color: #ff7055; border-bottom: 2px solid #ff7055; padding-bottom: 0.25rem; }
+        .btn-logout { background: #f8f9fa; padding: 0.4rem 1.2rem; border-radius: 20px; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: #6c757d; text-decoration: none; }
+        .back-link:hover { color: #ff7055; }
+        .hero { background: linear-gradient(135deg, #10b981, #059669); border-radius: 24px; padding: 2rem; color: white; text-align: center; margin-bottom: 2rem; }
+        .hero h1 { font-size: 1.8rem; }
+        .hero .big-number { font-size: 3rem; font-weight: 700; margin: 0.5rem 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: white; border-radius: 16px; padding: 1.2rem; text-align: center; border: 1px solid #e9ecef; }
+        .stat-icon { font-size: 2rem; color: #ff7055; margin-bottom: 0.5rem; }
+        .stat-number { font-size: 1.5rem; font-weight: 700; color: #2c3b4b; }
+        .info-section { background: white; border-radius: 20px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #e9ecef; }
+        .info-section h2 { font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .tip-card { background: #f8f9fa; border-radius: 16px; padding: 1rem; }
+        @media (max-width: 768px) { .container { padding: 1rem; } .nav-links { gap: 1rem; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/dashboard" class="logo">Leftover<span>Chef</span></a>
+        <div class="nav-links">
+            <a href="/dashboard">Fridge</a>
+            <a href="/discover">Discover</a>
+            <a href="/stats" class="active">Impact</a>
+            <a href="/cookbook">Cookbook</a>
+            <a href="/logout" class="btn-logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <a href="/dashboard" class="back-link"><i class="fas fa-arrow-left"></i> Back to fridge</a>
+        <div class="hero"><h1>🌍 Your Impact Matters</h1><p>Every meal you cook with leftovers makes a difference</p><div class="big-number">1.3 Billion Tons</div><p>of food wasted globally each year</p></div>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-apple-alt"></i></div><div class="stat-number">100+</div><div>Recipes</div></div>
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-leaf"></i></div><div class="stat-number">100%</div><div>Zero Waste</div></div>
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-dollar-sign"></i></div><div class="stat-number">₹10,000+</div><div>Saved yearly</div></div>
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-tree"></i></div><div class="stat-number">25%</div><div>Less Carbon</div></div>
+        </div>
+        <div class="info-section"><h2><i class="fas fa-magic"></i> How Leftover Chef Helps</h2><ul style="margin-left: 1.5rem;"><li>Smart matching - uses 100% of your selected ingredients</li><li>Expiry tracking - never forget what's in your fridge</li><li>Pantry staples only - no special ingredients needed</li><li>100+ zero-waste recipes updated regularly</li></ul></div>
+        <div class="info-section"><h2><i class="fas fa-lightbulb"></i> Zero Waste Tips</h2><div class="tip-grid"><div class="tip-card"><h4>🍌 Ripe Banana?</h4><p>Make smoothie or banana bread!</p></div><div class="tip-card"><h4>🌿 Wilting Coriander?</h4><p>Blend into chutney!</p></div><div class="tip-card"><h4>🍞 Stale Bread?</h4><p>Make bread upma or croutons!</p></div></div></div>
+        <div class="info-section" style="text-align: center; background: #2c3b4b; color: white;"><h2 style="color: white;"><i class="fas fa-heart"></i> Join the Movement</h2><p>Every meal cooked with leftovers = less waste + more savings + happier planet</p><p style="margin-top: 1rem;"><strong>Start today. Waste nothing.</strong></p></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookbook - Leftover Chef</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: #343a40; }
+        .navbar { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e9ecef; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: #2c3b4b; text-decoration: none; }
+        .logo span { color: #ff7055; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: #6c757d; font-weight: 500; }
+        .nav-links a:hover { color: #ff7055; }
+        .nav-links a.active { color: #ff7055; border-bottom: 2px solid #ff7055; padding-bottom: 0.25rem; }
+        .btn-logout { background: #f8f9fa; padding: 0.4rem 1.2rem; border-radius: 20px; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: #6c757d; text-decoration: none; }
+        .back-link:hover { color: #ff7055; }
+        .hero { background: linear-gradient(135deg, #8b5cf6, #ff7055); border-radius: 24px; padding: 2rem; color: white; text-align: center; margin-bottom: 2rem; }
+        .hero h1 { font-size: 1.8rem; }
+        .cookbook-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .cookbook-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e9ecef; position: relative; }
+        .cookbook-image { height: 140px; background: #e9ecef; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #adb5bd; }
+        .bookmark-icon { position: absolute; top: 10px; right: 10px; background: #ff7055; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .cookbook-info { padding: 1rem; }
+        .cookbook-info h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .cookbook-meta { font-size: 0.65rem; color: #6c757d; margin-bottom: 0.5rem; display: flex; gap: 1rem; }
+        .btn-remove { background: none; border: 1px solid #e9ecef; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.65rem; cursor: pointer; }
+        .btn-remove:hover { background: #fee2e2; border-color: #dc2626; color: #dc2626; }
+        @media (max-width: 768px) { .container { padding: 1rem; } .nav-links { gap: 1rem; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/dashboard" class="logo">Leftover<span>Chef</span></a>
+        <div class="nav-links">
+            <a href="/dashboard">Fridge</a>
+            <a href="/discover">Discover</a>
+            <a href="/stats">Impact</a>
+            <a href="/cookbook" class="active">Cookbook</a>
+            <a href="/logout" class="btn-logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <a href="/dashboard" class="back-link"><i class="fas fa-arrow-left"></i> Back to fridge</a>
+        <div class="hero"><h1>📖 My Cookbook</h1><p>Your saved must-try recipes</p></div>
+        <div class="cookbook-grid">
+            <div class="cookbook-card"><div class="cookbook-image"><i class="fas fa-utensils"></i></div><div class="bookmark-icon"><i class="fas fa-bookmark"></i></div><div class="cookbook-info"><h3>Lemon Rice</h3><div class="cookbook-meta"><span>⏱️ 5 min</span><span>🌱 Veg</span></div><p>Tangy lemon rice with leftover rice</p><button class="btn-remove" onclick="this.closest('.cookbook-card').remove()">Remove</button></div></div>
+            <div class="cookbook-card"><div class="cookbook-image"><i class="fas fa-utensils"></i></div><div class="bookmark-icon"><i class="fas fa-bookmark"></i></div><div class="cookbook-info"><h3>Egg Bhurji</h3><div class="cookbook-meta"><span>⏱️ 8 min</span><span>🍗 Non-Veg</span></div><p>Spicy scrambled eggs</p><button class="btn-remove" onclick="this.closest('.cookbook-card').remove()">Remove</button></div></div>
+            <div class="cookbook-card"><div class="cookbook-image"><i class="fas fa-utensils"></i></div><div class="bookmark-icon"><i class="fas fa-bookmark"></i></div><div class="cookbook-info"><h3>Banana Smoothie</h3><div class="cookbook-meta"><span>⏱️ 3 min</span><span>🌱 Veg</span></div><p>Healthy breakfast smoothie</p><button class="btn-remove" onclick="this.closest('.cookbook-card').remove()">Remove</button></div></div>
+        </div>
+        <div style="margin-top: 2rem; text-align: center; padding: 1.5rem; background: white; border-radius: 20px;"><i class="fas fa-heart" style="color: #ff7055;"></i><p style="margin-top: 0.5rem;">Bookmark your favorite recipes and they'll appear here!</p></div>
+    </div>
+</body>
+</html>

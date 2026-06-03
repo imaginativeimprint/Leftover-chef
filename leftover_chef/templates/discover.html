@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover - Leftover Chef</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: #343a40; }
+        .navbar { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e9ecef; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: #2c3b4b; text-decoration: none; }
+        .logo span { color: #ff7055; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: #6c757d; font-weight: 500; }
+        .nav-links a:hover { color: #ff7055; }
+        .nav-links a.active { color: #ff7055; border-bottom: 2px solid #ff7055; padding-bottom: 0.25rem; }
+        .btn-logout { background: #f8f9fa; padding: 0.4rem 1.2rem; border-radius: 20px; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: #6c757d; text-decoration: none; }
+        .back-link:hover { color: #ff7055; }
+        .hero { background: linear-gradient(135deg, #2c3b4b, #ff7055); border-radius: 24px; padding: 2rem; color: white; text-align: center; margin-bottom: 2rem; }
+        .hero h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .recipe-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e9ecef; transition: 0.2s; }
+        .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .recipe-image { height: 160px; background: #e9ecef; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #adb5bd; }
+        .recipe-info { padding: 1rem; }
+        .recipe-info h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .recipe-meta { font-size: 0.7rem; color: #6c757d; margin-bottom: 0.5rem; display: flex; gap: 1rem; }
+        .recipe-info p { font-size: 0.75rem; color: #6c757d; margin-bottom: 1rem; }
+        .btn-try { background: #f8f9fa; color: #2c3b4b; padding: 0.4rem 1rem; border-radius: 30px; text-decoration: none; font-size: 0.7rem; font-weight: 600; display: inline-block; }
+        @media (max-width: 768px) { .container { padding: 1rem; } .nav-links { gap: 1rem; } .nav-links a { font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/dashboard" class="logo">Leftover<span>Chef</span></a>
+        <div class="nav-links">
+            <a href="/dashboard">Fridge</a>
+            <a href="/discover" class="active">Discover</a>
+            <a href="/stats">Impact</a>
+            <a href="/cookbook">Cookbook</a>
+            <a href="/logout" class="btn-logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <a href="/dashboard" class="back-link"><i class="fas fa-arrow-left"></i> Back to fridge</a>
+        <div class="hero"><h1>✨ Discover New Recipes</h1><p>Fresh ideas added weekly to keep your cooking exciting</p></div>
+        <div class="recipe-grid">
+            <div class="recipe-card"><div class="recipe-image"><i class="fas fa-utensils"></i></div><div class="recipe-info"><h3>Roti Pizza</h3><div class="recipe-meta"><span>⏱️ 8 min</span><span>🌱 Veg</span></div><p>Turn leftover roti into pizza!</p><a href="/dashboard" class="btn-try">Try this →</a></div></div>
+            <div class="recipe-card"><div class="recipe-image"><i class="fas fa-utensils"></i></div><div class="recipe-info"><h3>Lemon Rice</h3><div class="recipe-meta"><span>⏱️ 5 min</span><span>🌱 Veg</span></div><p>Using leftover rice</p><a href="/dashboard" class="btn-try">Try this →</a></div></div>
+            <div class="recipe-card"><div class="recipe-image"><i class="fas fa-utensils"></i></div><div class="recipe-info"><h3>Curd Rice</h3><div class="recipe-meta"><span>⏱️ 5 min</span><span>🌱 Veg</span></div><p>Comfort food with leftover curd</p><a href="/dashboard" class="btn-try">Try this →</a></div></div>
+            <div class="recipe-card"><div class="recipe-image"><i class="fas fa-utensils"></i></div><div class="recipe-info"><h3>Egg Bhurji</h3><div class="recipe-meta"><span>⏱️ 8 min</span><span>🍗 Non-Veg</span></div><p>Quick scrambled eggs with spices</p><a href="/dashboard" class="btn-try">Try this →</a></div></div>
+            <div class="recipe-card"><div class="recipe-image"><i class="fas fa-utensils"></i></div><div class="recipe-info"><h3>Banana Smoothie</h3><div class="recipe-meta"><span>⏱️ 3 min</span><span>🌱 Veg</span></div><p>Healthy breakfast smoothie</p><a href="/dashboard" class="btn-try">Try this →</a></div></div>
+            <div class="recipe-card"><div class="recipe-image"><i class="fas fa-utensils"></i></div><div class="recipe-info"><h3>Bread Upma</h3><div class="recipe-meta"><span>⏱️ 8 min</span><span>🌱 Veg</span></div><p>Quick snack from leftover bread</p><a href="/dashboard" class="btn-try">Try this →</a></div></div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 20px;"><i class="fas fa-plus-circle" style="font-size: 2rem; color: #ff7055;"></i><p style="margin-top: 0.5rem;">New recipes added every week!</p></div>
+    </div>
+</body>
+</html>

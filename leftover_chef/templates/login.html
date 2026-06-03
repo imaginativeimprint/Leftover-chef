@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Leftover Chef</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('https://tint.creativemarket.com/sl3-ef8dqGKQ_JyTvdQWPikmVGUycPzuIYxSEqljPdc/width:1820/height:1206/gravity:ce/rt:fill-down/el:1/preset:cm_watermark_retina/czM6Ly9maWxlcy5jcmVhdGl2ZW1hcmtldC5jb20vaW1hZ2VzL3NjcmVlbnNob3RzL3Byb2R1Y3RzLzEyMzUvMTIzNTUvMTIzNTUzMTcvMy0wOTcxMy1vLmpwZw?1711382318');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 1rem;
+        }
+
+        h1 { 
+            font-size: 1.5rem; 
+            text-align: center; 
+            margin-bottom: 0.5rem; 
+            color: #2c3b4b; 
+        }
+
+        .subtitle { 
+            text-align: center; 
+            color: #6c757d; 
+            font-size: 0.85rem; 
+            margin-bottom: 1.5rem; 
+        }
+
+        .form-group { 
+            margin-bottom: 1rem; 
+        }
+
+        label { 
+            display: block; 
+            font-size: 0.7rem; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            color: #6c757d; 
+            margin-bottom: 0.3rem; 
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        input:focus { 
+            outline: none; 
+            border-color: #ff7055; 
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #ff7055;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        button:hover { 
+            background: #2c3b4b; 
+        }
+
+        .error { 
+            background: #fee2e2; 
+            color: #dc2626; 
+            padding: 0.6rem; 
+            border-radius: 10px; 
+            font-size: 0.8rem; 
+            margin-bottom: 1rem; 
+            text-align: center; 
+        }
+
+        .links { 
+            text-align: center; 
+            margin-top: 1rem; 
+            font-size: 0.8rem; 
+        }
+
+        .links a { 
+            color: #ff7055; 
+            text-decoration: none; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <h1>Welcome Back</h1>
+        <div class="subtitle">Sign in to reduce food waste</div>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required placeholder="••••••••">
+            </div>
+
+            <button type="submit">Login →</button>
+        </form>
+
+        <div class="links">
+            <a href="/register">No account? Sign up</a> · 
+            <a href="/">Home</a>
+        </div>
+    </div>
+</body>
+</html>

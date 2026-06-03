@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Matches - Leftover Chef</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3b4b;
+            --accent: #ff7055;
+            --veg: #10b981;
+            --nonveg: #ef4444;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('https://tint.creativemarket.com/sl3-ef8dqGKQ_JyTvdQWPikmVGUycPzuIYxSEqljPdc/width:1820/height:1206/gravity:ce/rt:fill-down/el:1/preset:cm_watermark_retina/czM6Ly9maWxlcy5jcmVhdGl2ZW1hcmtldC5jb20vaW1hZ2VzL3NjcmVlbnNob3RzL3Byb2R1Y3RzLzEyMzUvMTIzNTUvMTIzNTUzMTcvMy0wOTcxMy1vLmpwZw?1711382318');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--gray-800);
+        }
+
+        .navbar {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--gray-600); font-weight: 500; font-size: 0.9rem; transition: 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+        .btn-logout { background: var(--gray-100); padding: 0.4rem 1.2rem; border-radius: 20px; }
+
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; color: var(--gray-600); text-decoration: none; font-size: 0.8rem; }
+        .back-link:hover { color: var(--accent); }
+
+        .stats {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .stats h2 { font-size: 1rem; font-weight: 600; }
+        .stats h2 span { font-size: 1.2rem; color: var(--accent); font-weight: 700; }
+
+        .filter-bar {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .filter-group { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+        .filter-label { font-size: 0.65rem; font-weight: 600; color: var(--gray-600); text-transform: uppercase; }
+        .filter-btn {
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--gray-300);
+            background: var(--white);
+            color: var(--gray-600);
+        }
+        .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .sort-group select {
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            border: 1px solid var(--gray-300);
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .recipe-card {
+            background: var(--white);
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .recipe-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        
+        .recipe-header {
+            padding: 0.8rem 1rem;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .match-badge {
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+        }
+        .match-perfect { background: #10b981; color: white; }
+        .match-great { background: #3b82f6; color: white; }
+        .match-good { background: #f59e0b; color: white; }
+        .recipe-header h3 { font-size: 1rem; font-weight: 600; margin-top: 0.3rem; }
+        .recipe-meta { display: flex; gap: 0.8rem; font-size: 0.6rem; color: var(--gray-600); margin-top: 0.2rem; flex-wrap: wrap; }
+
+        .recipe-body { padding: 0.8rem 1rem; }
+        .match-reason {
+            background: #fef3c7;
+            padding: 0.4rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            color: #92400e;
+            margin-bottom: 0.6rem;
+        }
+        .ingredients-section { margin-bottom: 0.6rem; }
+        .ingredients-section h4 { font-size: 0.6rem; font-weight: 600; margin-bottom: 0.25rem; color: var(--gray-600); text-transform: uppercase; }
+        .used-items { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+        .used-badge { background: #dcfce7; color: #166534; padding: 0.15rem 0.5rem; border-radius: 20px; font-size: 0.6rem; }
+        .pantry-badge { background: #fef3c7; color: #92400e; padding: 0.15rem 0.5rem; border-radius: 20px; font-size: 0.6rem; }
+        .description { font-size: 0.7rem; color: var(--gray-600); line-height: 1.4; margin: 0.5rem 0; }
+        .action-buttons { display: flex; gap: 0.5rem; margin-top: 0.6rem; }
+        .btn-view, .btn-cook {
+            flex: 1;
+            padding: 0.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+        }
+        .btn-view { background: var(--gray-100); color: var(--gray-800); }
+        .btn-view:hover { background: var(--gray-200); }
+        .btn-cook { background: var(--primary); color: white; }
+        .btn-cook:hover { background: var(--accent); }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: var(--white);
+            max-width: 550px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 24px;
+            padding: 1.2rem;
+            position: relative;
+            margin: 1rem;
+        }
+        .close-modal {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.6rem;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--gray-600);
+            background: var(--gray-100);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .no-results { text-align: center; padding: 2rem; background: var(--white); border-radius: 16px; border: 1px solid var(--gray-200); }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .filter-bar { flex-direction: column; align-items: stretch; }
+            .filter-group { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/dashboard" class="logo">Leftover<span>Chef</span></a>
+        <div class="nav-links">
+            <a href="/dashboard">Fridge</a>
+            <a href="/discover">Discover</a>
+            <a href="/stats">Impact</a>
+            <a href="/cookbook">Cookbook</a>
+            <a href="/logout" class="btn-logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="/dashboard" class="back-link"><i class="fas fa-arrow-left"></i> Back to fridge</a>
+
+        <div class="stats">
+            <h2><span id="totalCount">{{ suggestions|length }}</span> recipe matches</h2>
+            <p style="font-size: 0.7rem;">Based on your {{ selected_count }} selected ingredient{% if selected_count != 1 %}s{% endif %}</p>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <span class="filter-label"><i class="fas fa-utensils"></i> Diet:</span>
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="veg">🌱 Vegetarian</button>
+                <button class="filter-btn" data-filter="nonveg">🍗 Non-Veg</button>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fas fa-tag"></i> Type:</span>
+                <button class="filter-btn" data-filter-type="quick">⏱️ Quick</button>
+                <button class="filter-btn" data-filter-type="soup">🥣 Soup</button>
+                <button class="filter-btn" data-filter-type="rice">🍚 With Rice</button>
+                <button class="filter-btn" data-filter-type="roti">🫓 With Roti</button>
+                <button class="filter-btn" data-filter-type="summer">☀️ Summer</button>
+            </div>
+            <div class="sort-group">
+                <span class="filter-label"><i class="fas fa-sort"></i> Sort:</span>
+                <select id="sortSelect">
+                    <option value="score">Match Score ↓</option>
+                    <option value="time">Time ↑</option>
+                    <option value="name">Name A-Z</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="recipesContainer">
+            {% for recipe in suggestions %}
+            <div class="recipe-card" 
+                 data-diet="{{ recipe.diet_type }}" 
+                 data-score="{{ recipe.match_score }}" 
+                 data-time="{{ recipe.prep_time_mins + recipe.cook_time_mins }}" 
+                 data-name="{{ recipe.title }}"
+                 data-type-1="{% if recipe.prep_time_mins + recipe.cook_time_mins <= 15 %}quick{% endif %}"
+                 data-type-2="{% if 'soup' in recipe.title.lower() %}soup{% endif %}"
+                 data-type-3="{% if 'rice' in recipe.title.lower() %}rice{% endif %}"
+                 data-type-4="{% if 'roti' in recipe.title.lower() or 'paratha' in recipe.title.lower() %}roti{% endif %}"
+                 data-type-5="{% if 'salad' in recipe.title.lower() or 'smoothie' in recipe.title.lower() %}summer{% endif %}"
+                 onclick="showRecipeDetails({{ recipe|tojson|safe }})">
+                <div class="recipe-header">
+                    <div>
+                        {% if recipe.match_score >= 90 %}
+                        <span class="match-badge match-perfect">★ Perfect {{ recipe.match_score }}%</span>
+                        {% elif recipe.match_score >= 70 %}
+                        <span class="match-badge match-great">● Great {{ recipe.match_score }}%</span>
+                        {% else %}
+                        <span class="match-badge match-good">○ Good {{ recipe.match_score }}%</span>
+                        {% endif %}
+                        <h3>{{ recipe.title }}</h3>
+                        <div class="recipe-meta">
+                            <span><i class="far fa-clock"></i> {{ recipe.prep_time_mins + recipe.cook_time_mins }} min</span>
+                            <span><i class="fas fa-utensils"></i> {{ recipe.servings }} serves</span>
+                            <span><i class="fas fa-fire"></i> {{ recipe.difficulty }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="recipe-body">
+                    <div class="match-reason"><i class="fas fa-lightbulb"></i> {{ recipe.match_reason }}</div>
+
+                    {% if recipe.used_items %}
+                    <div class="ingredients-section">
+                        <h4>✅ From your fridge</h4>
+                        <div class="used-items">
+                            {% for item in recipe.used_items %}
+                            <span class="used-badge">{{ item.name }} ({{ item.required }} {{ item.unit }})</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if recipe.missing_items %}
+                    <div class="ingredients-section">
+                        <h4>🧂 Pantry staples needed</h4>
+                        <div class="used-items">
+                            {% for item in recipe.missing_items %}
+                            <span class="pantry-badge">+ {{ item.name }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="description">{{ recipe.description[:120] }}{% if recipe.description|length > 120 %}...{% endif %}</div>
+
+                    <div class="action-buttons" onclick="event.stopPropagation()">
+                        <button class="btn-view" onclick='showRecipeDetails({{ recipe|tojson|safe }})'><i class="fas fa-book-open"></i> View Full Recipe</button>
+                        <form action="/cook_recipe" method="POST" onsubmit="return confirm('Mark this recipe as cooked? This will deduct ingredients from your fridge.')">
+                            <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                            <input type="hidden" name="selected_items" value="{{ selected_items }}">
+                            <button type="submit" class="btn-cook"><i class="fas fa-check-circle"></i> I Made This</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="no-results">
+                <i class="fas fa-sad-tear"></i>
+                <p>No recipes found with your selected ingredients.</p>
+                <p style="font-size: 0.75rem; margin-top: 0.5rem;">Try selecting different ingredients or add more to your fridge.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const recipeCards = document.querySelectorAll('.recipe-card');
+        const totalCountSpan = document.getElementById('totalCount');
+        const sortSelect = document.getElementById('sortSelect');
+        let currentDietFilter = 'all';
+        let currentTypeFilters = new Set();
+        
+        document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentDietFilter = this.getAttribute('data-filter');
+                applyFiltersAndSort();
+            });
+        });
+        
+        document.querySelectorAll('.filter-btn[data-filter-type]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const type = this.getAttribute('data-filter-type');
+                if (currentTypeFilters.has(type)) {
+                    currentTypeFilters.delete(type);
+                    this.classList.remove('active');
+                } else {
+                    currentTypeFilters.add(type);
+                    this.classList.add('active');
+                }
+                applyFiltersAndSort();
+            });
+        });
+        
+        function filterRecipes() {
+            let visibleCount = 0;
+            recipeCards.forEach(card => {
+                const diet = card.getAttribute('data-diet');
+                let shouldShow = true;
+                
+                if (currentDietFilter !== 'all' && diet !== currentDietFilter) {
+                    shouldShow = false;
+                }
+                
+                if (shouldShow && currentTypeFilters.size > 0) {
+                    let hasType = false;
+                    for (let i = 1; i <= 5; i++) {
+                        const type = card.getAttribute(`data-type-${i}`);
+                        if (type && currentTypeFilters.has(type)) {
+                            hasType = true;
+                            break;
+                        }
+                    }
+                    if (!hasType) shouldShow = false;
+                }
+                
+                card.style.display = shouldShow ? 'block' : 'none';
+                if (shouldShow) visibleCount++;
+            });
+            totalCountSpan.textContent = visibleCount;
+        }
+        
+        function sortRecipes() {
+            const sortBy = sortSelect.value;
+            const container = document.getElementById('recipesContainer');
+            const visibleCards = Array.from(recipeCards).filter(card => card.style.display !== 'none');
+            
+            visibleCards.sort((a, b) => {
+                if (sortBy === 'score') return (parseInt(b.getAttribute('data-score')) || 0) - (parseInt(a.getAttribute('data-score')) || 0);
+                if (sortBy === 'time') return (parseInt(a.getAttribute('data-time')) || 999) - (parseInt(b.getAttribute('data-time')) || 999);
+                return (a.getAttribute('data-name') || '').localeCompare(b.getAttribute('data-name') || '');
+            });
+            
+            visibleCards.forEach(card => container.appendChild(card));
+        }
+        
+        function applyFiltersAndSort() { filterRecipes(); sortRecipes(); }
+        
+        sortSelect.addEventListener('change', () => applyFiltersAndSort());
+        
+        function showRecipeDetails(recipe) {
+            const modal = document.getElementById('recipeModal');
+            const modalContent = document.getElementById('modalContent');
+            if (!recipe) { modalContent.innerHTML = '<p>Error loading recipe details.</p>'; modal.style.display = 'flex'; return; }
+            
+            const usedCount = recipe.used_items ? recipe.used_items.length : 0;
+            
+            modalContent.innerHTML = `
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.3rem; font-weight: 600; color: var(--primary);">${escapeHtml(recipe.title)}</h3>
+                    <div style="display: flex; gap: 0.8rem; justify-content: center; margin-top: 0.3rem; font-size: 0.7rem; color: var(--gray-600);">
+                        <span>⏱️ ${(recipe.prep_time_mins || 0) + (recipe.cook_time_mins || 0)} min</span>
+                        <span>🍽️ ${recipe.servings || 2} serves</span>
+                        <span>🏷️ ${recipe.difficulty || 'Easy'}</span>
+                    </div>
+                </div>
+                <hr style="margin: 0.8rem 0;">
+                <h4 style="font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--accent);">📝 Description</h4>
+                <p style="color: var(--gray-600); line-height: 1.5; margin-bottom: 0.8rem; font-size: 0.8rem;">${escapeHtml(recipe.description || 'No description available.')}</p>
+                <hr style="margin: 0.8rem 0;">
+                <h4 style="font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--accent);">👨‍🍳 Instructions</h4>
+                <p style="color: var(--gray-600); line-height: 1.5; white-space: pre-line; font-size: 0.8rem;">${escapeHtml(recipe.instructions || '1. Prepare all ingredients.\n2. Follow standard cooking method.\n3. Enjoy your zero-waste meal!')}</p>
+                <hr style="margin: 0.8rem 0;">
+                <div style="background: #dcfce7; padding: 0.8rem; border-radius: 12px;">
+                    <strong style="color: #166534; font-size: 0.75rem;">💚 Zero Waste Impact</strong>
+                    <p style="font-size: 0.7rem; margin-top: 0.2rem; color: #166534;">You used ${usedCount} leftover ingredient(s) that would have gone to waste!</p>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        }
+        
+        function escapeHtml(text) { if (!text) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+        function closeModal() { document.getElementById('recipeModal').style.display = 'none'; }
+        window.onclick = function(event) { const modal = document.getElementById('recipeModal'); if (event.target === modal) closeModal(); }
+        
+        applyFiltersAndSort();
+    </script>
+</body>
+</html>
