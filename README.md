@@ -13,6 +13,8 @@ Leftover-Chef is a lightweight, responsive web application designed to help mini
 
 ## Tech Stack
 * **Frontend:** HTML5, CSS3, JavaScript
+* **Backend:** Python , Flask
+* **Database:** PHPMYADMIN
 
 ---
 
